@@ -269,5 +269,80 @@ Note: Distinct means no duplicate elements.
     The INNER JOIN is a process that matches rows from the first table and the second table which have the same key (as defined by the ON constraint) to create a result row with the combined columns from both tables. After the tables are joined, the other clauses we learned previously are then applied.
 # Exercise
     We've added a new table to the Pixar database so that you can try practicing some joins. The BoxOffice table stores information about the ratings and sales of each particular Pixar movie, and the Movie_id column in that table corresponds with the Id column in the Movies table 1-to-1. Try and solve the tasks below using the INNER JOIN introduced above.
+![Table](3.png)
+ 1. Find the domestic and international sales for each movie
+ Answer:
+ ```sql
+ {
+    SELECT title, domestic_sales, international_sales
+    FROM movies
+    JOIN boxoffice
+    ON movies.id = boxoffice.movie_id
+ } 
+ ```
+ 2. Show the sales numbers for each movie that did better internationally rather than domestically
+ ```sql
+ {
+    SELECT title, domestic_sales, international_sales
+    FROM movies
+    JOIN boxoffice
+    ON movies.id = boxoffice.movie_id
+    where domestic_sales < international_sales;
+ }
+ ```
+ 3. List all the movies by their ratings in descending order
+ ```sql
+ {
+    SELECT title, rating
+    FROM movies
+    JOIN boxoffice
+    ON movies.id = boxoffice.movie_id
+    ORDER BY rating DESC;
+ }
+ ```
+# SQL Lesson 7: OUTER JOINs
+    Depending on how you want to analyze the data, the INNER JOIN we used last lesson might not be sufficient because the resulting table only contains data that belongs in both of the tables.
 
-    
+    If the two tables have asymmetric data, which can easily happen when data is entered in different stages, then we would have to use a LEFT JOIN, RIGHT JOIN or FULL JOIN instead to ensure that the data you need is not left out of the results.
+```sql
+{
+    SELECT column, another_column, …
+    FROM mytable
+    INNER/LEFT/RIGHT/FULL JOIN another_table 
+    ON mytable.id = another_table.matching_id
+    WHERE condition(s)
+    ORDER BY column, … ASC/DESC
+    LIMIT num_limit OFFSET num_offset;
+}
+```
+    Like the INNER JOIN these three new joins have to specify which column to join the data on.
+    When joining table A to table B, a LEFT JOIN simply includes rows from A regardless of whether a matching row is found in B. The RIGHT JOIN is the same, but reversed, keeping rows in B regardless of whether a match is found in A. Finally, a FULL JOIN simply means that rows from both tables are kept, regardless of whether a matching row exists in the other table.
+
+    When using any of these new joins, you will likely have to write additional logic to deal with NULLs in the result and constraints (more on this in the next lesson).
+# Exercise
+    In this exercise, you are going to be working with a new table which stores fictional data about Employees in the film studio and their assigned office Buildings. Some of the buildings are new, so they don't have any employees in them yet, but we need to find some information about them regardless.
+
+    Since our browser SQL database is somewhat limited, only the LEFT JOIN is supported in the exercise below.
+![Table](4.png)
+1. Find the list of all buildings that have employees
+Answer:
+```sql
+{
+    SELECT DISTINCT building FROM employees;
+}
+```
+2. Find the list of all buildings and their capacity
+```sql
+{
+    SELECT * FROM buildings;
+}
+```
+3. List all buildings and the distinct employee roles in each building (including empty buildings)
+```sql
+{
+    SELECT DISTINCT building_name, role 
+    FROM buildings 
+    LEFT JOIN employees
+    ON building_name = building;
+}
+```
