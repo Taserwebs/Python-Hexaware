@@ -3,11 +3,11 @@
 SQL exercise [Link](https://sqlbolt.com/lesson/select_queries_introduction)
 
 # SQL Lesson 1: SELECT queries 101
-    To retrieve data from a SQL database, we need to write SELECT statements, which are often colloquially refered to as queries. A query in itself is just a statement which declares what data we are looking for, where to find it in the database, and optionally, how to transform it before it is returned. It has a specific syntax though, which is what we are going to learn in the following exercises.
+To retrieve data from a SQL database, we need to write SELECT statements, which are often colloquially refered to as queries. A query in itself is just a statement which declares what data we are looking for, where to find it in the database, and optionally, how to transform it before it is returned. It has a specific syntax though, which is what we are going to learn in the following exercises.
 
-    As we mentioned in the introduction, you can think of a table in SQL as a type of an entity (ie. Dogs), and each row in that table as a specific instance of that type (ie. A pug, a beagle, a different colored pug, etc). This means that the columns would then represent the common properties shared by all instances of that entity (ie. Color of fur, length of tail, etc).
+As we mentioned in the introduction, you can think of a table in SQL as a type of an entity (ie. Dogs), and each row in that table as a specific instance of that type (ie. A pug, a beagle, a different colored pug, etc). This means that the columns would then represent the common properties shared by all instances of that entity (ie. Color of fur, length of tail, etc).
 
-    And given a table of data, the most basic query we could write would be one that selects for a couple columns (properties) of the table with all the rows (instances).
+And given a table of data, the most basic query we could write would be one that selects for a couple columns (properties) of the table with all the rows (instances).
 ```sql
 {
     Select query for a specific columns
@@ -15,9 +15,9 @@ SQL exercise [Link](https://sqlbolt.com/lesson/select_queries_introduction)
         FROM mytable;
 }
 ```
-    The result of this query will be a two-dimensional set of rows and columns, effectively a copy of the table, but only with the columns that we requested.
+The result of this query will be a two-dimensional set of rows and columns, effectively a copy of the table, but only with the columns that we requested.
 
-    If we want to retrieve absolutely all the columns of data from a table, we can then use the asterisk (*) shorthand in place of listing all the column names individually.
+If we want to retrieve absolutely all the columns of data from a table, we can then use the asterisk (*) shorthand in place of listing all the column names individually.
 
 #### Select query for all columns
 ```sql
@@ -26,12 +26,11 @@ SELECT *
 FROM mytable;
 }
 ```
-
-    This query, in particular, is really useful because it's a simple way to inspect a table by dumping all the data at once.
+This query, in particular, is really useful because it's a simple way to inspect a table by dumping all the data at once.
 
 # Exercise
 
-    We will be using a database with data about some of Pixar's classic movies for most of our exercises. This first exercise will only involve the Movies table, and the default query below currently shows all the properties of each movie. To continue onto the next lesson, alter the query to find the exact information we need for each task.
+We will be using a database with data about some of Pixar's classic movies for most of our exercises. This first exercise will only involve the Movies table, and the default query below currently shows all the properties of each movie. To continue onto the next lesson, alter the query to find the exact information we need for each task.
 
 
 |Id|Title|Director|Year|Length_minutes| 
@@ -49,9 +48,9 @@ Answer:
 }
 ```
 # SQL Lesson 2: Queries with constraints (Pt. 1)
-    Now we know how to select for specific columns of data from a table, but if you had a table with a hundred million rows of data, reading through all the rows would be inefficient and perhaps even impossible.
+Now we know how to select for specific columns of data from a table, but if you had a table with a hundred million rows of data, reading through all the rows would be inefficient and perhaps even impossible.
 
-    In order to filter certain results from being returned, we need to use a WHERE clause in the query. The clause is applied to each row of data by checking specific column values to determine whether it should be included in the results or not.
+In order to filter certain results from being returned, we need to use a WHERE clause in the query. The clause is applied to each row of data by checking specific column values to determine whether it should be included in the results or not.
 
 ```sql
 {
@@ -64,7 +63,7 @@ WHERE condition
 ```
 
 # Exercise
-        Using the right constraints, find the information we need from the Movies table for each task below.
+Using the right constraints, find the information we need from the Movies table for each task below.
 
 ANS : 
 ```sql
@@ -75,13 +74,13 @@ ANS :
 ```
 
 # SQL Lesson 3: Queries with constraints (Pt. 2)
-    When writing WHERE clauses with columns containing text data, SQL supports a number of useful operators to do things like case-insensitive string comparison and wildcard pattern matching. We show a few common text-data specific operators below:
+When writing WHERE clauses with columns containing text data, SQL supports a number of useful operators to do things like case-insensitive string comparison and wildcard pattern matching. We show a few common text-data specific operators below:
 
- ![Table](/Screenshot%202024-04-24%20143530.png)
-    We should note that while most database implementations are quite efficient when using these operators, full-text search is best left to dedicated libraries like Apache Lucene or Sphinx. These libraries are designed specifically to do full text search, and as a result are more efficient and can support a wider variety of search features including internationalization and advanced queries.
+![Table](/Screenshot%202024-04-24%20143530.png)
+We should note that while most database implementations are quite efficient when using these operators, full-text search is best left to dedicated libraries like Apache Lucene or Sphinx. These libraries are designed specifically to do full text search, and as a result are more efficient and can support a wider variety of search features including internationalization and advanced queries.
 
 # Exercise
-    Here's the definition of a query with a WHERE clause again, go ahead and try and write some queries with the operators above to limit the results to the information we need in the tasks below.
+Here's the definition of a query with a WHERE clause again, go ahead and try and write some queries with the operators above to limit the results to the information we need in the tasks below.
 
 
 
@@ -126,7 +125,7 @@ Select query with constraints
     }
     ```
 # SQL Lesson 4: Filtering and sorting Query results
-    Even though the data in a database may be unique, the results of any particular query may not be – take our Movies table for example, many different movies can be released the same year. In such cases, SQL provides a convenient way to discard rows that have a duplicate column value by using the DISTINCT keyword.
+Even though the data in a database may be unique, the results of any particular query may not be – take our Movies table for example, many different movies can be released the same year. In such cases, SQL provides a convenient way to discard rows that have a duplicate column value by using the DISTINCT keyword.
 ```sql
 {
     SELECT DISTINCT column, another_column, …
@@ -134,12 +133,12 @@ Select query with constraints
     WHERE condition(s);
 }
 ```
-    Since the DISTINCT keyword will blindly remove duplicate rows, we will learn in a future lesson how to discard duplicates based on specific columns using grouping and the GROUP BY clause.
+Since the DISTINCT keyword will blindly remove duplicate rows, we will learn in a future lesson how to discard duplicates based on specific columns using grouping and the GROUP BY clause.
 
 # Ordering results
-    Unlike our neatly ordered table in the last few lessons, most data in real databases are added in no particular column order. As a result, it can be difficult to read through and understand the results of a query as the size of a table increases to thousands or even millions rows.
+Unlike our neatly ordered table in the last few lessons, most data in real databases are added in no particular column order. As a result, it can be difficult to read through and understand the results of a query as the size of a table increases to thousands or even millions rows.
 
-    To help with this, SQL provides a way to sort your results by a given column in ascending or descending order using the ORDER BY clause.
+To help with this, SQL provides a way to sort your results by a given column in ascending or descending order using the ORDER BY clause.
 ```sql
 {
     SELECT column, another_column, …
@@ -148,11 +147,11 @@ Select query with constraints
     ORDER BY column ASC/DESC;
 }
 ```
-    When an ORDER BY clause is specified, each row is sorted alpha-numerically based on the specified column's value. In some databases, you can also specify a collation to better sort data containing international text.
+When an ORDER BY clause is specified, each row is sorted alpha-numerically based on the specified column's value. In some databases, you can also specify a collation to better sort data containing international text.
 
 # Limiting results to a subset
-    Another clause which is commonly used with the ORDER BY clause are the LIMIT and OFFSET clauses, which are a useful optimization to indicate to the database the subset of the results you care about.
-    The LIMIT will reduce the number of rows to return, and the optional OFFSET will specify where to begin counting the number rows from.
+Another clause which is commonly used with the ORDER BY clause are the LIMIT and OFFSET clauses, which are a useful optimization to indicate to the database the subset of the results you care about.
+The LIMIT will reduce the number of rows to return, and the optional OFFSET will specify where to begin counting the number rows from.
 ```sql
 {
     SELECT column, another_column, …
@@ -162,9 +161,9 @@ Select query with constraints
     LIMIT num_limit OFFSET num_offset;
 }
 ```
-    If you think about websites like Reddit or Pinterest, the front page is a list of links sorted by popularity and time, and each subsequent page can be represented by sets of links at different offsets in the database. Using these clauses, the database can then execute queries faster and more efficiently by processing and returning only the requested content.
+If you think about websites like Reddit or Pinterest, the front page is a list of links sorted by popularity and time, and each subsequent page can be represented by sets of links at different offsets in the database. Using these clauses, the database can then execute queries faster and more efficiently by processing and returning only the requested content.
 # Exercise
-    There are a few concepts in this lesson, but all are pretty straight-forward to apply. To spice things up, we've gone and scrambled the Movies table for you in the exercise to better mimic what kind of data you might see in real life. Try and use the necessary keywords and clauses introduced above in your queries.
+There are a few concepts in this lesson, but all are pretty straight-forward to apply. To spice things up, we've gone and scrambled the Movies table for you in the exercise to better mimic what kind of data you might see in real life. Try and use the necessary keywords and clauses introduced above in your queries.
 ![Table](/1.png)
 1. List all directors of Pixar movies (alphabetically), without duplicates
 Answer:
@@ -198,7 +197,7 @@ Note: Distinct means no duplicate elements.
  }
  ```
  # SQL Review: Simple SELECT Queries
-    You've done a good job getting to this point! Now that you've gotten a taste of how to write a basic query, you need to practice writing queries that solve actual problems.
+You've done a good job getting to this point! Now that you've gotten a taste of how to write a basic query, you need to practice writing queries that solve actual problems.
 ```sql
 {
     SELECT column, another_column, …
@@ -209,7 +208,7 @@ Note: Distinct means no duplicate elements.
 }
 ```
 # Exercise
-    In the exercise below, you will be working with a different table. This table instead contains information about a few of the most populous cities of North America[1] including their population and geo-spatial location in the world.
+In the exercise below, you will be working with a different table. This table instead contains information about a few of the most populous cities of North America[1] including their population and geo-spatial location in the world.
 ![Table](/2.png)
  1. List all the Canadian cities and their populations
  Answer:
@@ -244,17 +243,17 @@ Note: Distinct means no duplicate elements.
  }
  ```
  # SQL Lesson 6: Multi-table queries with JOINs
-    Up to now, we've been working with a single table, but entity data in the real world is often broken down into pieces and stored across multiple orthogonal tables using a process known as normalization[1].
+Up to now, we've been working with a single table, but entity data in the real world is often broken down into pieces and stored across multiple orthogonal tables using a process known as normalization[1].
 
 # Database normalization
-    Database normalization is useful because it minimizes duplicate data in any single table, and allows for data in the database to grow independently of each other (ie. Types of car engines can grow independent of each type of car). As a trade-off, queries get slightly more complex since they have to be able to find data from different parts of the database, and performance issues can arise when working with many large tables.
+Database normalization is useful because it minimizes duplicate data in any single table, and allows for data in the database to grow independently of each other (ie. Types of car engines can grow independent of each type of car). As a trade-off, queries get slightly more complex since they have to be able to find data from different parts of the database, and performance issues can arise when working with many large tables.
 
-    In order to answer questions about an entity that has data spanning multiple tables in a normalized database, we need to learn how to write a query that can combine all that data and pull out exactly the information we need.
+In order to answer questions about an entity that has data spanning multiple tables in a normalized database, we need to learn how to write a query that can combine all that data and pull out exactly the information we need.
 
 # Multi-table queries with JOINs
-    Tables that share information about a single entity need to have a primary key that identifies that entity uniquely across the database. One common primary key type is an auto-incrementing integer (because they are space efficient), but it can also be a string, hashed value, so long as it is unique.
+Tables that share information about a single entity need to have a primary key that identifies that entity uniquely across the database. One common primary key type is an auto-incrementing integer (because they are space efficient), but it can also be a string, hashed value, so long as it is unique.
 
-    Using the JOIN clause in a query, we can combine row data across two separate tables using this unique key. The first of the joins that we will introduce is the INNER JOIN.
+Using the JOIN clause in a query, we can combine row data across two separate tables using this unique key. The first of the joins that we will introduce is the INNER JOIN.
 ```sql
 {
     SELECT column, another_table_column, …
@@ -266,9 +265,9 @@ Note: Distinct means no duplicate elements.
     LIMIT num_limit OFFSET num_offset;
 }
 ```
-    The INNER JOIN is a process that matches rows from the first table and the second table which have the same key (as defined by the ON constraint) to create a result row with the combined columns from both tables. After the tables are joined, the other clauses we learned previously are then applied.
+The INNER JOIN is a process that matches rows from the first table and the second table which have the same key (as defined by the ON constraint) to create a result row with the combined columns from both tables. After the tables are joined, the other clauses we learned previously are then applied.
 # Exercise
-    We've added a new table to the Pixar database so that you can try practicing some joins. The BoxOffice table stores information about the ratings and sales of each particular Pixar movie, and the Movie_id column in that table corresponds with the Id column in the Movies table 1-to-1. Try and solve the tasks below using the INNER JOIN introduced above.
+We've added a new table to the Pixar database so that you can try practicing some joins. The BoxOffice table stores information about the ratings and sales of each particular Pixar movie, and the Movie_id column in that table corresponds with the Id column in the Movies table 1-to-1. Try and solve the tasks below using the INNER JOIN introduced above.
 ![Table](3.png)
  1. Find the domestic and international sales for each movie
  Answer:
@@ -301,9 +300,9 @@ Note: Distinct means no duplicate elements.
  }
  ```
 # SQL Lesson 7: OUTER JOINs
-    Depending on how you want to analyze the data, the INNER JOIN we used last lesson might not be sufficient because the resulting table only contains data that belongs in both of the tables.
+Depending on how you want to analyze the data, the INNER JOIN we used last lesson might not be sufficient because the resulting table only contains data that belongs in both of the tables.
 
-    If the two tables have asymmetric data, which can easily happen when data is entered in different stages, then we would have to use a LEFT JOIN, RIGHT JOIN or FULL JOIN instead to ensure that the data you need is not left out of the results.
+If the two tables have asymmetric data, which can easily happen when data is entered in different stages, then we would have to use a LEFT JOIN, RIGHT JOIN or FULL JOIN instead to ensure that the data you need is not left out of the results.
 ```sql
 {
     SELECT column, another_column, …
@@ -315,14 +314,14 @@ Note: Distinct means no duplicate elements.
     LIMIT num_limit OFFSET num_offset;
 }
 ```
-    Like the INNER JOIN these three new joins have to specify which column to join the data on.
-    When joining table A to table B, a LEFT JOIN simply includes rows from A regardless of whether a matching row is found in B. The RIGHT JOIN is the same, but reversed, keeping rows in B regardless of whether a match is found in A. Finally, a FULL JOIN simply means that rows from both tables are kept, regardless of whether a matching row exists in the other table.
+ Like the INNER JOIN these three new joins have to specify which column to join the data on.
+ When joining table A to table B, a LEFT JOIN simply includes rows from A regardless of whether a matching row is found in B. The RIGHT JOIN is the same, but reversed, keeping rows in B regardless of whether a match is found in A. Finally, a FULL JOIN simply means that rows from both tables are kept, regardless of whether a matching row exists in the other table.
 
-    When using any of these new joins, you will likely have to write additional logic to deal with NULLs in the result and constraints (more on this in the next lesson).
+When using any of these new joins, you will likely have to write additional logic to deal with NULLs in the result and constraints (more on this in the next lesson).
 # Exercise
-    In this exercise, you are going to be working with a new table which stores fictional data about Employees in the film studio and their assigned office Buildings. Some of the buildings are new, so they don't have any employees in them yet, but we need to find some information about them regardless.
+In this exercise, you are going to be working with a new table which stores fictional data about Employees in the film studio and their assigned office Buildings. Some of the buildings are new, so they don't have any employees in them yet, but we need to find some information about them regardless.
 
-    Since our browser SQL database is somewhat limited, only the LEFT JOIN is supported in the exercise below.
+Since our browser SQL database is somewhat limited, only the LEFT JOIN is supported in the exercise below.
 ![Table](4.png)
 1. Find the list of all buildings that have employees
 Answer:
